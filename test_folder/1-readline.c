@@ -7,8 +7,10 @@
 int main(void)
 {
 	char *buffer;
+	char *userin = NULL;
+	size_t len = 0;
 
-	buffer = getline(
-	printf("$ \n");
+	printf("$ getline(&userin, &len, stdin)\n");
+	printf("%s/n", buffer);
 	return (0);
 }
