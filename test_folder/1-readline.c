@@ -6,11 +6,12 @@
  */
 int main(void)
 {
-	char *buffer;
+	int buffer;
 	char *userin = NULL;
 	size_t len = 0;
 
-	printf("$ getline(&userin, &len, stdin)\n");
-	printf("%s/n", buffer);
-	return (0);
+	printf("$ ");
+	buffer = getline(&userin, &len, stdin);
+	printf("%s", userin);
+	return (buffer);
 }
