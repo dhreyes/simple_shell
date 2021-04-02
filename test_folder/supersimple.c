@@ -10,15 +10,21 @@
  *
  *
  *
+ *
  */
 int main(void)
 {
+	pid_t pid;
 	char *argv[] = {"/bin/ls", "-l", "/tmp/", NULL};
 
-	if (execve(argv[0], argv, NULL) == -1)
-	{
-		perror("Error:");
-	}
+	pid = fork();
+	wait(0);
 
+	if (pid == 0)
+	{
+		execve(argv[0], argv, NULL);
+		printf("nah brah\n");
+	}
+	printf("papa\n");
 	return (0);
 }
