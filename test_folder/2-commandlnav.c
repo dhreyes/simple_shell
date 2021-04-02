@@ -8,7 +8,6 @@
  */
 int main(__attribute__((unused)) int argc, char *argv[])
 {
-
 	char *token = strtok(argv[1], " "); /*Return first token*/
 
 	while (token != NULL) /*Keep printing tokens*/

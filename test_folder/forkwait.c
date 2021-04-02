@@ -15,11 +15,11 @@ int main(int argc, char *argv[])
 {
 	int id = fork();
 	int n, i;
-	if (id == 0)
+	if (id == 0) /* Child process */
 	{
 		n = 1;
 	}
-	else
+	else /* Parent process */
 	{
 		n = 6;
 	}
