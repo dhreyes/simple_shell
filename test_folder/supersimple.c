@@ -18,14 +18,6 @@ int main(void)
 	pid_t pid;
 	char *argv[] = {"/bin/ls", "-l", "/tmp/", NULL};
 
-	pid = fork();
-	wait(0);
-
-	if (pid == 0)
-	{
-		execve(argv[0], argv, NULL);
-		printf("nah brah\n");
-	}
 	do {
 	pid = fork();
 	wait (0);
@@ -35,7 +27,7 @@ int main(void)
 		execve(argv[0], argv, NULL);
 		printf("Nah nah nah");
 	}
-	}while (pid != 0 && idx < 5);
+	}while (pid != 0 && idx < 6);
 	printf("papa\n");
 	return (0);
 }
