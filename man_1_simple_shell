@@ -1,50 +1,18 @@
-.TH man 3 "3.12.2021" "HOLBERTON SCHOOL" "_PRINTF man page"
+.TH SIMPLE_SHELL(1) "4.14.2021" "HOLBERTON SCHOOL" "SHELLTON man page"
+
 .SH NAME
-.B _printf - Formatted output conversion
+shellton \- Shell terminal
+
 .SH SYNOPSIS
-.B #include "holberton.h"
-.sp
-.B int _printf(const char *
-.I format
-.B , ...);
+.B ./shellton
+.TP
+
 .SH DESCRIPTION
-.B
-Our _printf function writes output to
-.I stdout
-, the standard output. It is variadic and can, therefore, take any number of arguments.
-.SH RETURN
-Successful execution returns the number of characters printed (minus the null byte).
-.sp
-Unsuccessful execution produces a negative value return.
-.SH FORMAT
-Our function is prepared to handle zero or more directives: non-special characters are copied literally to the output, while conversion modifiers will fetch the amount of arguments and interpret them in order.
-.SH CONVERSION
-Are particular characters that, when paired to our modifier (%) will convert output to the desired notation. They are:
+.B shellton
 .TP
-.B d, i
-For signed decimals.
-.TP
-.B c
-For unsigned chars.
-.TP
-.B s
-Expects a const char * argument to be a pointer to an array of chars.
-.TP
-.B r
-Prints a string in reverse
-.TP
-.B R
-Prints a rot13 converted string
-.TP
-.B %
-A '%' is written but no argument is converted. The complete version specification is '%%'
-.SH EXAMPLE
-To print out the name and age of a person where age is of type int and name and is a pointer to a string:
-#include "holberton.h"
-.sp
-_printf("My name is %s and I am %d years old\\n", name, age);
-.SH SEE ALSO
-.I printf(3)
-.I _putchar.c
+Shellton runs a shell interface that can recieve commands line prompts. 
+It can read commands with or without their full PATH.
+
 .SH AUTHORS
-Gabriel Vazquez Calderon, Yared Torres Rodriguez
+Yared Torres Rodriguez
+David Harvey
