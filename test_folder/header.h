@@ -16,6 +16,6 @@ typedef struct list_s
 } list_t;
 
 char *_getenv(const char *name);
-void _print_path();
+list_t *print_path();
 
 #endif
