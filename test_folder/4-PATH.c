@@ -2,6 +2,7 @@
 
 size_t print_list(const list_t *h);
 list_t *add_node_end(list_t **head, const char *str);
+char *_getenv(const char *name);
 
 list_t *print_path()
 {
@@ -10,7 +11,7 @@ list_t *print_path()
 	list_t *head;
 
 	head = malloc(sizeof(list_t));
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	token = strtok(path, ":");
 	head->str = strdup(token);
 
