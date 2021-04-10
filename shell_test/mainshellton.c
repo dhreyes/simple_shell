@@ -1,5 +1,7 @@
 #include "shellton.h"
 
+char *tokenize(char *input);
+
 /**
  * main - initializes shellton
  *
@@ -21,12 +23,14 @@ void shelltonprompt()
 {
 	char *prompt = "SHELLTON$ ";
 	char *input;
+	char *tokens;
 
 	write(1, prompt, 10);
 
 	while(1)
 	{
 		input = command();
+		tokens = tokenize(input);
 
 		free(input);
 	}
@@ -55,5 +59,16 @@ char *command(void)
 	}
 	return (userin);
 }
+char *tokenize(char *input)
+{
+	char *userinput;
+	char *token;
 
+	token = strtok(input, " ");
 
+	while (token != NULL)
+	{
+		token = strtok(NULL, " ");
+	}
+	return (token);
+}
