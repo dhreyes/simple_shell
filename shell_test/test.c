@@ -1,6 +1,6 @@
 #include "shellton.h"
 
-char *tokenize(char *input);
+char **tokenize(char *input);
 
 /**
  * main - initializes shellton
@@ -23,25 +23,26 @@ void shelltonprompt()
 {
 	char *prompt = "SHELLTON$ ";
 	char *input;
-	char *tokens;
+	char **tokens;
 	pid_t pid;
 
+	write(1, prompt, 10);
 
 	while(1)
 	{
-		write(1, prompt, 10);
 		input = command();
 		printf("This is the input: %s\n", input);
 		tokens = tokenize(input);
-		printf("These are the tokens: %s\n", tokens);
+		/*
 		pid = fork();
 		wait (0);
-
 		if (pid == 0)
 		{
 			execve(input, &tokens, NULL);
 		}
+		*/
 		free(input);
+		write(1, prompt, 10);
 		/*
 		free(tokens);
 */
@@ -71,20 +72,26 @@ char *command(void)
 	}
 	return (userin);
 }
-char *tokenize(char *input)
+char **tokenize(char *input)
 {
 	char *userinput;
 	char *token;
-	char *alltokens;
+	char **alltokens;
+	int i = 0;
+	alltokens = malloc(sizeof(*input));
 
 	token = strtok(input, " ");
-
+	alltokens[0] = token;
 	while (token != NULL)
 	{
-
+		while (alltokens[i] != 0)
+		{
 		token = strtok(NULL, " ");
+		alltokens[i] = token;
+		i++;
+		}
 	}
-	return (token);
+	return (alltokens);
 }
 
 void printDir()
