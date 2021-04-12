@@ -1,6 +1,6 @@
 #include "shellton.h"
 
-char *tokenize(char *input);
+char **tokenize(char *input);
 
 /**
  * main - initializes shellton
@@ -23,28 +23,36 @@ void shelltonprompt()
 {
 	char *prompt = "SHELLTON$ ";
 	char *input;
-	char *tokens;
+	char **alltokens;
 	pid_t pid;
+	int status;
+	int i;
 
 
 	while(1)
 	{
 		write(1, prompt, 10);
 		input = command();
-		printf("This is the input: %s\n", input);
-		tokens = tokenize(input);
-		printf("These are the tokens: %s\n", tokens);
+		/*printf("This is the input: %s\n", input); */
+		alltokens = tokenize(input);
+		/*
+		for (i = 0; alltokens[i]; i++)
+		{
+			printf("Tokens: <%s>\n", alltokens[i]);
+		}
+		*/
 		pid = fork();
-		wait (0);
 
 		if (pid == 0)
 		{
-			execve(input, &tokens, NULL);
+			execve(alltokens[0], alltokens, NULL);
+		}
+		else
+		{
+			wait (&status);
 		}
 		free(input);
-		/*
-		free(tokens);
-*/
+		free(alltokens);
 	}
 }
 
@@ -71,20 +79,34 @@ char *command(void)
 	}
 	return (userin);
 }
-char *tokenize(char *input)
+char **tokenize(char *input)
 {
-	char *userinput;
 	char *token;
-	char *alltokens;
+	char **alltokens;
+	char *input_cp = strdup(input);
+	int count = 0;
+	char *delim = " \n\t";
+	int idx = 0;
 
-	token = strtok(input, " ");
-
+	token = strtok(input_cp, delim);
+	
 	while (token != NULL)
 	{
-
-		token = strtok(NULL, " ");
+		count++;
+		token = strtok(NULL, delim);
 	}
-	return (token);
+	free(input_cp);
+	alltokens = malloc(sizeof(char *) * (count + 1));
+
+	token = strtok(input, delim);
+	while (token != NULL)
+	{
+		alltokens[idx] = token;
+		token = strtok(NULL, delim);
+		idx++;
+	}
+	alltokens[idx] = NULL;
+	return (alltokens);
 }
 
 void printDir()
