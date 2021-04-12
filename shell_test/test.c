@@ -33,14 +33,12 @@ void shelltonprompt()
 		input = command();
 		printf("This is the input: %s\n", input);
 		tokens = tokenize(input);
-		/*
 		pid = fork();
 		wait (0);
 		if (pid == 0)
 		{
-			execve(input, &tokens, NULL);
+			execve(input, tokens, NULL);
 		}
-		*/
 		free(input);
 		write(1, prompt, 10);
 		/*
@@ -78,8 +76,8 @@ char **tokenize(char *input)
 	char *token;
 	char **alltokens;
 	int i = 0;
-	alltokens = malloc(sizeof(*input));
 
+	alltokens = malloc(sizeof(char) * i);
 	token = strtok(input, " ");
 	alltokens[0] = token;
 	while (token != NULL)
