@@ -1,6 +1,9 @@
 #include "shellton.h"
+#include <signal.h>
 
 char **tokenize(char *input);
+void printDir();
+void sighandler(int signum);
 
 /**
  * main - initializes shellton
@@ -26,12 +29,14 @@ void shelltonprompt()
 	char **alltokens;
 	pid_t pid;
 	int status;
+	/*
 	int i;
-
+*/
+	signal(SIGINT, sighandler);
 
 	while(1)
 	{
-		write(1, prompt, 10);
+		write(STDIN_FILENO, prompt, 10);
 		input = command();
 		/*printf("This is the input: %s\n", input); */
 		alltokens = tokenize(input);
@@ -45,7 +50,8 @@ void shelltonprompt()
 
 		if (pid == 0)
 		{
-			execve(alltokens[0], alltokens, NULL);
+			if (execve(alltokens[0], alltokens, NULL) == -1)
+				perror("Error");
 		}
 		else
 		{
@@ -72,10 +78,11 @@ char *command(void)
 
 	chk = getline(&userin, &buffer, stdin);
 
-	if (chk == -1)
+	if (chk == EOF)
 	{
-		perror("Error: ");
-		return (0);
+		perror("Error");
+		free(userin);
+		exit(0);
 	}
 	return (userin);
 }
@@ -114,4 +121,10 @@ void printDir()
 	char cwd[1024];
 	getcwd(cwd, sizeof(cwd));
 	printf("%s\n", cwd);
+}
+
+void sighandler(int signum)
+{
+	printf("Caught signal %d coming out\n", signum);
+	exit(1);
 }

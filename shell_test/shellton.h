@@ -10,12 +10,26 @@
 #include <fcntl.h>
 #include <signal.h>
 
+extern char **environ;
+
 typedef struct list_s
 {
 	char *str;
 	unsigned int len;
 	struct list_s *next;
 } list_t;
+
+typedef struct aliases
+{
+	char *alias_name; /* compare to user command */
+	char *real_name; /* returns this if they match */
+} alias;
+
+typedef struct my_builtins
+{
+	char *name;
+	int (*func)(void);
+} my_builtins;
 
 void shelltonprompt();
 char *command();
