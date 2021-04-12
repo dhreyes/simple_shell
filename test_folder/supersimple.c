@@ -17,15 +17,20 @@ int main(void)
 	int idx = 1;
 	pid_t pid;
 	char *argv[] = {"/bin/ls", "-l", "/tmp/", NULL};
+	int status;
 
 	do {
 	pid = fork();
-	wait (0);
 	idx++;
 	if (pid == 0)
 	{
 		execve(argv[0], argv, NULL);
 		printf("Nah nah nah");
+	}
+	else
+	{
+		wait (&status);
+		printf("Parent\n");
 	}
 	}while (pid != 0 && idx < 6);
 	printf("papa\n");

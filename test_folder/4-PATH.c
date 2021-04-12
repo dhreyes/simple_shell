@@ -11,7 +11,7 @@ list_t *print_path()
 	list_t *head;
 
 	head = malloc(sizeof(list_t));
-	path = _getenv("PATH");
+	path = getenv("PATH");
 	token = strtok(path, ":");
 	head->str = strdup(token);
 
