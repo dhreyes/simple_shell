@@ -33,5 +33,8 @@ typedef struct my_builtins
 
 void shelltonprompt();
 char *command();
+char **tokenize(char *input);
+void printDir();
+void sighandler(int signum);
 
 #endif
