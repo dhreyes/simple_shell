@@ -1,9 +1,4 @@
 #include "shellton.h"
-#include <signal.h>
-
-char **tokenize(char *input);
-void printDir();
-void sighandler(int signum);
 
 /**
  * main - initializes shellton
@@ -36,7 +31,9 @@ void shelltonprompt()
 
 	while(1)
 	{
-		write(STDIN_FILENO, prompt, 10);
+		if (isatty(STDIN_FILENO))
+			write(STDIN_FILENO, prompt, 10);
+		
 		input = command();
 		/*printf("This is the input: %s\n", input); */
 		alltokens = tokenize(input);
