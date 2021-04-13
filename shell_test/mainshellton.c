@@ -24,8 +24,15 @@ void shelltonprompt()
 	char **alltokens;
 	pid_t pid;
 	int status;
+<<<<<<< HEAD
 	int i = 0;
 
+=======
+	char *exit = "exit";
+	/*
+	int i;
+*/
+>>>>>>> 4fdad02645569f1bc0f6d4461ee89ef86b69aed3
 	signal(SIGINT, sighandler);
 
 	while(1)
@@ -34,6 +41,7 @@ void shelltonprompt()
 			write(STDIN_FILENO, prompt, 10);
 		
 		input = command();
+<<<<<<< HEAD
 		if (strcmp(input,"exit\n") == 0)
 		{
 			free(input);
@@ -52,12 +60,21 @@ void shelltonprompt()
 		{
 			alltokens = tokenize(input);
 		}
+=======
+		
+		/*printf("This is the input: %s\n", input); */
+		alltokens = tokenize(input);
+>>>>>>> 4fdad02645569f1bc0f6d4461ee89ef86b69aed3
 		/*
 		for (i = 0; alltokens[i]; i++)
 		{
 			printf("Tokens: <%s>\n", alltokens[i]);
 		}
 		*/
+		
+	/*	if (strcmp(alltokens, exit) == 0)
+			return (0);
+	*/
 		pid = fork();
 
 		if (pid == 0)
@@ -137,6 +154,36 @@ void printDir()
 
 void sighandler(int signum)
 {
+<<<<<<< HEAD
 	printf("\nCaught signal %d coming out\n", signum);
+=======
+	printf("\nShellton says, \"Goodbye from room #%d\"\n", signum);
+>>>>>>> 4fdad02645569f1bc0f6d4461ee89ef86b69aed3
 	exit(1);
 }
+
+int shelltonexit(void);
+
+int shelltonexit()
+{
+	return (0);
+}
+
+/* PATH */
+
+int i = 0;
+
+while (environ[i] != NULL)
+{
+	if (strcmp(environ[i], "PATH") == 0)
+		return (environ[i]);
+	i++;
+}
+
+char *path;
+char *pathtok;
+char **directories
+
+
+
+
