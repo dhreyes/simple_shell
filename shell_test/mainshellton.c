@@ -24,6 +24,7 @@ void shelltonprompt()
 	char **alltokens;
 	pid_t pid;
 	int status;
+	char *exit = "exit";
 	/*
 	int i;
 */
@@ -43,6 +44,10 @@ void shelltonprompt()
 			printf("Tokens: <%s>\n", alltokens[i]);
 		}
 		*/
+		
+	/*	if (strcmp(alltokens, exit) == 0)
+			return (0);
+	*/
 		pid = fork();
 
 		if (pid == 0)
@@ -122,6 +127,6 @@ void printDir()
 
 void sighandler(int signum)
 {
-	printf("Caught signal %d coming out\n", signum);
+	printf("\nShellton says, \"Goodbye from room #%d\"\n", signum);
 	exit(1);
 }
