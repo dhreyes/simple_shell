@@ -24,9 +24,8 @@ void shelltonprompt()
 	char **alltokens;
 	pid_t pid;
 	int status;
-	/*
-	int i;
-*/
+	int i = 0;
+
 	signal(SIGINT, sighandler);
 
 	while(1)
@@ -35,8 +34,24 @@ void shelltonprompt()
 			write(STDIN_FILENO, prompt, 10);
 		
 		input = command();
-		/*printf("This is the input: %s\n", input); */
-		alltokens = tokenize(input);
+		if (strcmp(input,"exit\n") == 0)
+		{
+			free(input);
+			exit(0);
+		}
+		if (strcmp(input,"env\n") == 0)
+		{
+			while(environ[i] != NULL)
+			{
+				printf("%s\n", environ[i]);
+				i++;
+			}
+		}
+	/*printf("This is the input: %s\n", input); */
+		if (!(strcmp(input,"env\n") == 0))
+		{
+			alltokens = tokenize(input);
+		}
 		/*
 		for (i = 0; alltokens[i]; i++)
 		{
@@ -122,6 +137,6 @@ void printDir()
 
 void sighandler(int signum)
 {
-	printf("Caught signal %d coming out\n", signum);
+	printf("\nCaught signal %d coming out\n", signum);
 	exit(1);
 }

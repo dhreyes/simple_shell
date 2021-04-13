@@ -28,7 +28,7 @@ typedef struct aliases
 typedef struct my_builtins
 {
 	char *name;
-	int (*func)(void);
+	void (*func)(char *builtin);
 } my_builtins;
 
 void shelltonprompt();
@@ -36,5 +36,6 @@ char *command();
 char **tokenize(char *input);
 void printDir();
 void sighandler(int signum);
+void get_function(char *builtin);
 
 #endif
