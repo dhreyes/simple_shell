@@ -36,6 +36,7 @@ void shelltonprompt()
 			write(STDIN_FILENO, prompt, 10);
 		
 		input = command();
+		
 		/*printf("This is the input: %s\n", input); */
 		alltokens = tokenize(input);
 		/*
@@ -130,3 +131,29 @@ void sighandler(int signum)
 	printf("\nShellton says, \"Goodbye from room #%d\"\n", signum);
 	exit(1);
 }
+
+int shelltonexit(void);
+
+int shelltonexit()
+{
+	return (0);
+}
+
+/* PATH */
+
+int i = 0;
+
+while (environ[i] != NULL)
+{
+	if (strcmp(environ[i], "PATH") == 0)
+		return (environ[i]);
+	i++;
+}
+
+char *path;
+char *pathtok;
+char **directories
+
+
+
+
