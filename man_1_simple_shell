@@ -10,7 +10,7 @@ shellton \- Shell terminal
 .SH DESCRIPTION
 .B shellton
 .TP
-Shellton runs a shell interface that can recieve commands line prompts. 
+Shellton runs a shell interface that can recieve commands line prompts.
 It can read commands with or without their full PATH.
 
 .SH AUTHORS

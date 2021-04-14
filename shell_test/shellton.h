@@ -36,7 +36,7 @@ char *command();
 char **tokenize(char *input);
 void printDir();
 void sighandler(int signum);
-void get_function(char *builtin);
+void *get_function(char *builtin);
 char *getpath(char **s);
 
 #endif
