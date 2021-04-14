@@ -24,10 +24,7 @@ void shelltonprompt()
 	char **alltokens;
 	pid_t pid;
 	int status;
-	char *exit = "exit";
-	/*
-	int i;
-*/
+
 	signal(SIGINT, sighandler);
 
 	while(1)
@@ -36,19 +33,46 @@ void shelltonprompt()
 			write(STDIN_FILENO, prompt, 10);
 		
 		input = command();
-		
-		/*printf("This is the input: %s\n", input); */
 		alltokens = tokenize(input);
-		/*
-		for (i = 0; alltokens[i]; i++)
-		{
-			printf("Tokens: <%s>\n", alltokens[i]);
-		}
-		*/
 		
-	/*	if (strcmp(alltokens, exit) == 0)
-			return (0);
-	*/
+		int i = 0;
+		char *path;
+		char *pathtoken;
+		char **directories;
+		int pidx = 0;
+		char *pathedtoken;
+
+		while (environ[i] != NULL)
+		{
+			if (strcmp(environ[i], "PATH") == 0)
+				path = environ[i];
+			i++;
+		}
+
+		pathtoken = strtok(path, ":");
+
+		while (pathtoken != NULL)
+		{
+			directories[pidx] = strdup(pathtoken); /* Might have to strdup for sake of mem */
+			pathtoken = strtok(NULL, ":");
+			pidx++;
+		}
+
+		char *cwd = getcwd(NULL, 0);
+		struct stat sb;
+
+		while (directories[pidx] != NULL)
+		{
+			chdir(directories[pidx]);
+			if (stat(alltokens[0], &sb) == 0)
+			{
+				alltokens[0] = strcat(directories[pidx], alltokens[0]);
+				break;
+			}
+			pidx++;
+		}
+		chdir(cwd);
+
 		pid = fork();
 
 		if (pid == 0)
@@ -138,31 +162,5 @@ int shelltonexit()
 {
 	return (0);
 }
-
-/* PATH */
-
-int i = 0;
-
-while (environ[i] != NULL)
-{
-	if (strcmp(environ[i], "PATH") == 0)
-		return (environ[i]);
-	i++;
-}
-
-char *path;
-char *pathtok;
-char **directories
-
-path = environ[i];
-
-pathtoken = strtok(path, ":");
-while (pathtoken != NULL)
-{
-	dirs[x] = strdup(pathtoken);
-	pathtoken = strtok(NULL, ":");
-	x++;
-}
-
 
 
