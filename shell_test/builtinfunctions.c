@@ -7,7 +7,7 @@
 void shellton_exit(char *builtin);
 
 
-void get_function(char *builtin)
+void *get_function(char *builtin)
 {
 	my_builtins functions[] = {
 		{ "exit\n", shellton_exit },
@@ -26,9 +26,10 @@ void get_function(char *builtin)
 	while (functions[idx].name)
 	{
 		if(functions[idx].name == builtin)
-			functions[idx].func;
+			return (functions[idx].func);
 		idx++;
 	}
+	return (NULL);
 }
 
 void shellton_exit(char *builtin)
