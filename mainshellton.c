@@ -30,7 +30,7 @@ void shelltonprompt(void)
 	pid_t pid;
 	int status;
 	int (*temp)(char *str);
-	char *exit = "exit\n";
+	char *xit = "exit\n";
 	char *env = "env\n";
 	char *cwd;
 	struct stat sb;
@@ -49,10 +49,18 @@ void shelltonprompt(void)
 		if (isatty(STDIN_FILENO))
 			write(STDIN_FILENO, prompt, 2);
 
+		input = command();
+
+		if (input == NULL)
+		{
+			free(path);
+			free(directories);
+			exit (0);
+		}
+
 		cwd = getcwd(NULL, 0);
 
-		input = command();
-		if (strcmp(input, exit) == 0)
+		if (strcmp(input, xit) == 0)
 		{
 			temp = get_function(input);
 			if (temp != NULL)

@@ -21,9 +21,8 @@ char *command(void)
 	chk = getline(&userin, &buffer, stdin);
 	if (chk == EOF)
 	{
-		perror("Error");
 		free(userin);
-		exit(0);
+		return (NULL);
 	}
 	return (userin);
 }
