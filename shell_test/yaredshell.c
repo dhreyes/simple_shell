@@ -24,6 +24,8 @@ void shelltonprompt()
 	char **alltokens;
 	pid_t pid;
 	int status;
+	char *cwd = getcwd(NULL, 0);
+	struct stat sb;
 
 	signal(SIGINT, sighandler);
 
@@ -35,17 +37,13 @@ void shelltonprompt()
 		input = command();
 		alltokens = tokenize(input);
 		
-		int i = 0;
 		char *path;
 		char **pathtoken;
 		char **directories;
 		int pidx = 0;
 
 		path = getenv("PATH");
-		pathtoken = tokenize(path);
-
-		char *cwd = getcwd(NULL, 0);
-		struct stat sb;
+		directories = tokenize(path);
 
 		while (directories[pidx] != NULL)
 		{
@@ -105,7 +103,7 @@ char **tokenize(char *input)
 	char **alltokens;
 	char *input_cp = strdup(input);
 	int count = 0;
-	char *delim = " \n\t";
+	char *delim = " :\n\t";
 	int idx = 0;
 
 	token = strtok(input_cp, delim);

@@ -1,55 +1,29 @@
 #include "shellton.h"
 
 /**
- * tokenize - parses input
- * @input: user input
- * Return: alltokens
+ * command - recieves command
+ * Return: user input
  */
 
-char **tokenize(char *input)
+char *command(void)
 {
-	char *token;
-	char **alltokens;
-	char *input_cp = strdup(input);
-	int count = 0;
-	char *delim = " \n\t";
-	int idx = 0;
+	char *userin;
+	size_t buffer = 256;
+	int chk;
 
-	token = strtok(input_cp, delim);
+	userin = malloc(sizeof(char) * buffer);
 
-	while (token != NULL)
+	if (userin == NULL)
 	{
-		count++;
-		token = strtok(NULL, delim);
+		free(userin);
+		return (0);
 	}
-	free(input_cp);
-	alltokens = malloc(sizeof(char *) * (count + 1));
-	token = strtok(input, delim);
-	while (token != NULL)
+	chk = getline(&userin, &buffer, stdin);
+	if (chk == EOF)
 	{
-		alltokens[idx] = token;
-		token = strtok(NULL, delim);
-		idx++;
+		perror("Error");
+		free(userin);
+		exit(0);
 	}
-	alltokens[idx] = NULL;
-	return (alltokens);
-}
-
-void free_alltkns(char **alltokens)
-{
-	int idx = 0;
-
-	if (alltokens == NULL)
-		return;
-
-	while (alltokens[idx])
-	{
-		free(alltokens[idx]);
-		++idx;
-	}
-
-	if (alltokens[idx] == NULL)
-		free(alltokens[idx]);
-
-	free(alltokens);
+	return (userin);
 }

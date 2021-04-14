@@ -1,6 +1,6 @@
 #include "shellton.h"
 
-void shelltonprompt(void);
+
 /**
  * main - initializes shellton
  * @ac: ac
@@ -24,7 +24,7 @@ int main(int ac, char **av, char **env)
 
 void shelltonprompt(void)
 {
-	char *prompt = "$ ";
+	char *prompt = "SHELLTON$ ";
 	char *input;
 	char **alltokens;
 	pid_t pid;
@@ -33,13 +33,12 @@ void shelltonprompt(void)
 	char *exit = "exit\n";
 	char *env = "env\n";
 	char *cwd;
-	struct stat sb;
+	struct stat *sb;
 	char **directories;
 	int pidx;
 	char *slash = "/";
 	char *path = strdup(getenv("PATH"));
 	char *catpath;
-	char *fullpath;
 
 	signal(SIGINT, sighandler);
 	directories = tokenize(path);
@@ -47,7 +46,7 @@ void shelltonprompt(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDIN_FILENO, prompt, 2);
+			write(STDIN_FILENO, prompt, 10);
 
 		cwd = getcwd(NULL, 0);
 
@@ -58,9 +57,6 @@ void shelltonprompt(void)
 			if (temp != NULL)
 			{
 				free(input);
-				free(directories);
-				free(path);
-				free(cwd);
 				temp("exit");
 			}
 		}
@@ -75,25 +71,26 @@ void shelltonprompt(void)
 			continue;
 		}
 		alltokens = tokenize(input);
+		sb = malloc(sizeof(struct stat));
 
 		for (pidx = 0; directories[pidx] != NULL; pidx++)
 		{
 			chdir(directories[pidx]);
-			if (stat(alltokens[0], &sb) == 0)
+			if (stat(alltokens[0], sb) == 0)
 			{
-				catpath = str_concat(directories[pidx], slash);
-				fullpath = str_concat(catpath, alltokens[0]);
-				free(catpath);
+				catpath = _strcat(directories[pidx], slash);
+				alltokens[0] = strcat(catpath, alltokens[0]);
 				break;
 			}
 		}
 
+		free(sb);
 		chdir(cwd);
-		pid = fork();
 
+		pid = fork();
 		if (pid == 0)
 		{
-			if (execve(fullpath, alltokens, NULL) == -1)
+			if (execve(alltokens[0], alltokens, NULL) == -1)
 				perror("Error");
 		}
 		else
@@ -102,7 +99,6 @@ void shelltonprompt(void)
 		}
 		free(input);
 		free(alltokens);
-		free(fullpath);
-		free(cwd);
+		free(catpath);
 	}
 }

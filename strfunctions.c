@@ -66,36 +66,49 @@ char *_strdup(char *str)
 	}
 	return (dup);
 }
+
 /**
- * *_strcat - concatenates
- * @dest: first string waiting for attachment
- * @src: string to be attached
- * Return: Always 0 (Success)
+ * str_concat - Concatenate (combine) two strings
+ * @s1: First string
+ * @s2: Second string
+ * Return: Pointer to new space in memory, NULL if it fails
  */
-int _strlen(char *str);
-
-char *_strcat(char *dest, char *src)
+char *str_concat(char *s1, char *s2)
 {
-	char *ptr = dest + _strlen(dest);
+	char *s3, *empt;
+	int i, len1, len2, j;
 
-	while (*src != '\0')
-		*ptr++ = *src++;
-	*ptr = '\0';
-	return (dest);
-}
-/**
- * _strlen - calc length of string
- * @str: input of string
- * Return: index
- */
-int _strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
+	empt = "";
+	if (s1 == NULL)
+		s1 = empt;
+	if (s2 == NULL)
+		s2 = empt;
+	i = len1 = len2 = 0;
+	while (s1[len1] != '\0')
 	{
+		len1++;
+	}
+	while (s2[len2] != '\0')
+	{
+		len2++;
+	}
+	len2++;
+	s3 = malloc((len1 + len2) * sizeof(char *));
+	if (s3 == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len1)
+	{
+		s3[i] = s1[i];
 		i++;
 	}
-	return (i);
+	j = 0;
+	while (j < len2)
+	{
+		s3[i] = s2[j];
+		i++;
+		j++;
+	}
+	s3[i] = '\0';
+	return (s3);
 }

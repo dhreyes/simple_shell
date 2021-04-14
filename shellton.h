@@ -39,10 +39,8 @@ void printDir();
 void sighandler(int signum);
 int (*get_function(char *builtin))(char *str);
 char *getpath(char **s);
-void free_alltkns(char **alltokens);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
-int _strlen(char *str);
-char *_strcat(char *dest, char *src);
+char *str_concat(char *s1, char *s2);
 
 #endif
