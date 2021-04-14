@@ -39,6 +39,7 @@ void shelltonprompt(void)
 
 		input = command();
 		alltokens = tokenize(input);
+		get_function(alltokens[0]);
 		pid = fork();
 		if (pid == 0)
 		{

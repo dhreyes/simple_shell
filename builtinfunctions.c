@@ -10,7 +10,7 @@ void shellton_exit(char *builtin);
 void *get_function(char *builtin)
 {
 	my_builtins functions[] = {
-		{ "exit\n", shellton_exit },
+		{ "exit", shellton_exit },
 		/*
 		{ "env", shellton_env },
 		{ "setenv", setenv },
@@ -21,18 +21,17 @@ void *get_function(char *builtin)
 	};
 	
 	int idx = 0;
-	int *function;
 
 	while (functions[idx].name)
 	{
-		if(functions[idx].name == builtin)
+		if(strcmp(functions[idx].name, builtin) == 0)
 			return (functions[idx].func);
 		idx++;
 	}
 	return (NULL);
 }
 
-void shellton_exit(char *builtin)
+void shellton_exit(__attribute__((unused))char *builtin)
 {
 	exit(0);
 }
