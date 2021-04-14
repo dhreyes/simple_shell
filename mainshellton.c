@@ -55,7 +55,7 @@ void shelltonprompt(void)
 		{
 			free(path);
 			free(directories);
-			exit (0);
+			exit(0);
 		}
 
 		cwd = getcwd(NULL, 0);
