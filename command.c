@@ -34,3 +34,22 @@ char **tokenize(char *input)
 	alltokens[idx] = NULL;
 	return (alltokens);
 }
+
+void free_alltkns(char **alltokens)
+{
+	int idx = 0;
+
+	if (alltokens == NULL)
+		return;
+
+	while (alltokens[idx])
+	{
+		free(alltokens[idx]);
+		++idx;
+	}
+
+	if (alltokens[idx] == NULL)
+		free(alltokens[idx]);
+
+	free(alltokens);
+}

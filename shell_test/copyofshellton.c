@@ -46,6 +46,7 @@ void shelltonprompt()
 				printf("%s\n", environ[i]);
 				i++;
 			}
+			environ[i] = NULL;
 		}
 	/*printf("This is the input: %s\n", input); */
 		if (!(strcmp(input,"env\n") == 0))
@@ -69,9 +70,9 @@ void shelltonprompt()
 		{
 			wait (&status);
 		}
-		free(input);
 		free(alltokens);
 	}
+	free(input);
 }
 
 char *command(void)

@@ -37,26 +37,12 @@ void shelltonprompt()
 		
 		int i = 0;
 		char *path;
-		char *pathtoken;
+		char **pathtoken;
 		char **directories;
 		int pidx = 0;
-		char *pathedtoken;
 
-		while (environ[i] != NULL)
-		{
-			if (strcmp(environ[i], "PATH") == 0)
-				path = environ[i];
-			i++;
-		}
-
-		pathtoken = strtok(path, ":");
-
-		while (pathtoken != NULL)
-		{
-			directories[pidx] = strdup(pathtoken); /* Might have to strdup for sake of mem */
-			pathtoken = strtok(NULL, ":");
-			pidx++;
-		}
+		path = getenv("PATH");
+		pathtoken = tokenize(path);
 
 		char *cwd = getcwd(NULL, 0);
 		struct stat sb;

@@ -29,6 +29,9 @@ void shelltonprompt(void)
 	char **alltokens;
 	pid_t pid;
 	int status;
+	int (*temp)(char *str);
+	char *exit = "exit\n";
+	char *env = "env\n";
 
 	signal(SIGINT, sighandler);
 
@@ -38,8 +41,26 @@ void shelltonprompt(void)
 			write(STDIN_FILENO, prompt, 10);
 
 		input = command();
+		if (strcmp(input, exit) == 0)
+		{
+			temp = get_function(input);
+			if (temp != NULL)
+			{
+				free(input);
+				temp("exit");
+			}
+		}
+		if (strcmp(input, env) == 0)
+		{
+			temp = get_function(input);
+			if (temp != NULL)
+			{
+				temp("env");
+			}
+			free(input);
+			continue;
+		}
 		alltokens = tokenize(input);
-		get_function(alltokens[0]);
 		pid = fork();
 		if (pid == 0)
 		{

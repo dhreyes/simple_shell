@@ -7,6 +7,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 #include <signal.h>
 
@@ -28,7 +29,7 @@ typedef struct aliases
 typedef struct my_builtins
 {
 	char *name;
-	void (*func)(char *builtin);
+	int (*func)(char *builtin);
 } my_builtins;
 
 void shelltonprompt();
@@ -36,7 +37,8 @@ char *command();
 char **tokenize(char *input);
 void printDir();
 void sighandler(int signum);
-void *get_function(char *builtin);
+int (*get_function(char *builtin))(char *str);
 char *getpath(char **s);
+void free_alltkns(char **alltokens);
 
 #endif

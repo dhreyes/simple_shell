@@ -4,15 +4,16 @@
  *
  *
  */
-void shellton_exit(char *builtin);
+int shellton_exit(char *builtin);
+int shellton_env(char *builtin);
 
 
-void *get_function(char *builtin)
+int (*get_function(char *builtin))(char *str)
 {
 	my_builtins functions[] = {
-		{ "exit", shellton_exit },
+		{ "exit\n", shellton_exit },
+		{ "env\n", shellton_env },
 		/*
-		{ "env", shellton_env },
 		{ "setenv", setenv },
 		{ "unsetenv", unsetenv },
 		{ "cd", cd },
@@ -31,7 +32,19 @@ void *get_function(char *builtin)
 	return (NULL);
 }
 
-void shellton_exit(__attribute__((unused))char *builtin)
+int shellton_exit(__attribute__((unused))char *builtin)
 {
 	exit(0);
+}
+
+int shellton_env(__attribute__((unused))char *builtin)
+{
+	int i = 0;
+
+	while(environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	return (0);
 }
