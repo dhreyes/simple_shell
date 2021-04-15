@@ -37,7 +37,7 @@ void shelltonprompt(void)
 	char **directories;
 	int pidx;
 	char *slash = "/";
-	char *path = strdup(getenv("PATH"));
+	char *path = _strdup(getenv("PATH"));
 	char *catpath;
 	char *fullpath;
 
@@ -60,7 +60,7 @@ void shelltonprompt(void)
 
 		cwd = getcwd(NULL, 0);
 
-		if (strcmp(input, xit) == 0)
+		if (_strcmp(input, xit) == 0)
 		{
 			temp = get_function(input);
 			if (temp != NULL)
@@ -72,7 +72,7 @@ void shelltonprompt(void)
 				temp("exit");
 			}
 		}
-		if (strcmp(input, env) == 0)
+		if (_strcmp(input, env) == 0)
 		{
 			temp = get_function(input);
 			if (temp != NULL)

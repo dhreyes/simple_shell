@@ -10,7 +10,7 @@ char **tokenize(char *input)
 {
 	char *token;
 	char **alltokens;
-	char *input_cp = strdup(input);
+	char *input_cp = _strdup(input);
 	int count = 0;
 	char *delim = " :\n\t";
 	int idx = 0;

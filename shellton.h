@@ -12,19 +12,11 @@
 #include <signal.h>
 
 extern char **environ;
-
-typedef struct list_s
-{
-	char *str;
-	unsigned int len;
-	struct list_s *next;
-} list_t;
-
-typedef struct aliases
-{
-	char *alias_name; /* compare to user command */
-	char *real_name; /* returns this if they match */
-} alias;
+/**
+ * struct my_builtins - builtin struct for builtins
+ * @name: string name of builtin
+ * @func: function pointer
+ */
 
 typedef struct my_builtins
 {
@@ -32,15 +24,14 @@ typedef struct my_builtins
 	int (*func)(char *builtin);
 } my_builtins;
 
-void shelltonprompt();
+void shelltonprompt(void);
 char *command();
 char **tokenize(char *input);
-void printDir();
 void sighandler(int signum);
 int (*get_function(char *builtin))(char *str);
-char *getpath(char **s);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 char *str_concat(char *s1, char *s2);
+char *_getenv(const char *name);
 
 #endif

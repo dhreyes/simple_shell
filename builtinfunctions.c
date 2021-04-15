@@ -19,7 +19,7 @@ int (*get_function(char *builtin))(char *str)
 
 	while (functions[idx].name)
 	{
-		if (strcmp(functions[idx].name, builtin) == 0)
+		if (_strcmp(functions[idx].name, builtin) == 0)
 			return (functions[idx].func);
 		idx++;
 	}
