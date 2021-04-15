@@ -5,7 +5,7 @@
  *@s2: string 2
  *Return: 0 if equal, -1 if less, +1 if more
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	int i, l1, l2;
 

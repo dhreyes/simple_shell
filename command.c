@@ -12,13 +12,13 @@ char *command(void)
 	int chk;
 
 	userin = malloc(sizeof(char) * buffer);
+	chk = getline(&userin, &buffer, stdin);
 
 	if (userin == NULL)
 	{
 		free(userin);
 		return (0);
 	}
-	chk = getline(&userin, &buffer, stdin);
 	if (chk == EOF)
 	{
 		free(userin);

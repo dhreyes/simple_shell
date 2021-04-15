@@ -1,6 +1,8 @@
 #include "shellton.h"
 
 void shelltonprompt(void);
+char *_getenv(const char *name);
+
 /**
  * main - initializes shellton
  * @ac: ac
@@ -37,7 +39,7 @@ void shelltonprompt(void)
 	char **directories;
 	int pidx;
 	char *slash = "/";
-	char *path = _strdup(getenv("PATH"));
+	char *path = _strdup(_getenv("PATH"));
 	char *catpath;
 	char *fullpath;
 

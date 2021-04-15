@@ -29,7 +29,7 @@ char *command();
 char **tokenize(char *input);
 void sighandler(int signum);
 int (*get_function(char *builtin))(char *str);
-int _strcmp(char *s1, char *s2);
+int _strcmp(const char *s1, const char *s2);
 char *_strdup(char *str);
 char *str_concat(char *s1, char *s2);
 char *_getenv(const char *name);

@@ -3,11 +3,10 @@
 /**
  * sighandler - handles signals
  * @signum: a signals num
- * Return: exit
+ * Return: Shellton says Farewell!
  */
 
 void sighandler(__attribute__((unused))int signum)
 {
-	printf("\nFarewell from SHELLTON\n");
 	exit(1);
 }
