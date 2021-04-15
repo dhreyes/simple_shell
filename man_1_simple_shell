@@ -1,18 +1,35 @@
-.TH SIMPLE_SHELL(1) "4.14.2021" "HOLBERTON SCHOOL" "SHELLTON man page"
+.TH SIMPLE_SHELL(1) "4.14.2021" "HOLBERTON SJU COHORT 14" "SHELLTON" "SHELLTON"
 
 .SH NAME
-shellton \- Shell terminal
+shellton \- Shellton terminal
 
 .SH SYNOPSIS
-.B ./shellton
+.B ./hsh
 .TP
+.B #include "shellton.h"
 
 .SH DESCRIPTION
-.B shellton
+.B SHELLTON$
 .TP
-Shellton runs a shell interface that can recieve commands line prompts.
-It can read commands with or without their full PATH.
+Shellton runs an interactive shell interface that can recieve input from a command line.
+It can read commands, tokenize them, and implement PATH.
+Shellton can also be used noninteractively.
+Shellton can handle EOF and terminate process with Ctrl+C (^C).
+
+.SH OPTIONS
+.TP
+.I INTERACTIVE
+.B ./hsh
+.TP
+.I NONINTERACTIVE
+.B Can be piped commands to input without running hsh.
+
+.SH BUILT-INS
+.TP
+.IP shellton_exit
+Exits shellton.
+.IP shellton_env
+Runs env on shellton.
 
 .SH AUTHORS
-Yared Torres Rodriguez
-David Harvey
+Yared Torres Rodriguez, David Harvey
