@@ -32,5 +32,10 @@
 #### shellton_env
 >Runs env on shellton.
 
+####Known Bugs:
+
+Shellton cannot handle single input characters, pressing ENTER or null.
+Random Gibberish will also break Shellton
+
 ## AUTHORS
 Yared Torres Rodriguez, David Harvey
